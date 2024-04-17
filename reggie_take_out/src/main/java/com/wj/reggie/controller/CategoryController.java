@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author wj
  * @version 1.0
@@ -72,5 +74,22 @@ public class CategoryController {
         log.info("分類情報を更新します：{}",category);
         categoryService.updateById(category);
         return R.success("分類情報を更新しました");
+    }
+//范型的类别是啥主要看返回的data里是什么，如果是一个对象范型就是对象，如果是某些字段就是String
+// 范型的クラスタイプは、主に返されるデータの内容によって決まる。もしオブジェクトが返される場合は、范型はそのオブジェクトになる。もしフィールドが返される場合は、Stringになる。
+    @GetMapping("/list")
+    public R<List<Category>> list(Category category){
+        //条件构造器
+        LambdaQueryWrapper<Category> queryWrapper=new LambdaQueryWrapper<>();
+        //添加条件
+        queryWrapper.eq(category.getType()!=null,Category::getType,category.getType());
+        //添加排序条件
+        queryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
+
+        List<Category> list = categoryService.list(queryWrapper);
+
+
+        return R.success(list);
+
     }
 }

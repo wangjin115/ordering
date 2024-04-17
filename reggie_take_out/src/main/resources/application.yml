@@ -17,5 +17,6 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
+#      全局设定，设定id的增长形式，他等于在实体类的id上加一个@tableId注解
 reggie:
   path: /Users/dreamtank/img
