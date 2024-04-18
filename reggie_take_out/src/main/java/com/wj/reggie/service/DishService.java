@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wj.reggie.dto.DishDto;
 import com.wj.reggie.entity.Dish;
 
+import java.util.List;
+
 /**
  * @author wj
  * @version 1.0
@@ -20,4 +22,8 @@ public interface DishService extends IService<Dish> {
 
     public void updateWithFlavor(DishDto dishDto);
 
+
+    public void removeWithFlavor(List<Long> ids);
+
+    public void startAndEnd(Integer status, Long[] ids);
 }
