@@ -64,6 +64,7 @@
                     if (regex.test(this.form.phone)) {
                         this.msgFlag = false
                         this.form.code = (Math.random()*1000000).toFixed(0)
+                      //  sendMsgApi({phone:this.from.phone})
                     }else{
                         this.msgFlag = true
                     }

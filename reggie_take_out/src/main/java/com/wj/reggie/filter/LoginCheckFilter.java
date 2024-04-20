@@ -36,7 +36,10 @@ public class LoginCheckFilter implements Filter {
                 "/employee/logout",
                 "/backend/**",
                 "/front/**",
-                "/common/**"
+                "/common/**",
+                "/user/login",
+                "/user/sendMsg"
+
         };
 //2、このリクエストの処理が必要かどうかを判断
         boolean check = check(urls, requestURI);
@@ -57,6 +60,17 @@ public class LoginCheckFilter implements Filter {
            filterChain.doFilter(request,response);
            return;
        }
+
+        //4-2、判断登录状态，如果已登录，则直接放行
+        if(request.getSession().getAttribute("user") != null){
+            log.info("ユーザーはログインしており、ユーザーIDは：{}",request.getSession().getAttribute("user"));
+
+            Long userId = (Long) request.getSession().getAttribute("user");
+            BaseContext.setCurrentId(userId);
+
+            filterChain.doFilter(request,response);
+            return;
+        }
         //5、未ログインの場合、ログインしていない結果を返し、出力ストリームを使用してクライアントページにデータを応答する
         response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
 

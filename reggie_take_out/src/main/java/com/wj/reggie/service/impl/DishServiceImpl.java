@@ -127,7 +127,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         dishLambdaQueryWrapper.eq(Dish::getStatus,1);
         int count = this.count(dishLambdaQueryWrapper);
         if (count>0){
-            throw new CustomException("菜品为起售状态，无法删除");
+            throw new CustomException("この料理は販売中のため削除できません。");
         }
         this.removeByIds(ids);
 
