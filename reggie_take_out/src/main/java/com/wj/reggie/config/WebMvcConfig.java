@@ -1,6 +1,4 @@
 package com.wj.reggie.config;
-
-import com.sun.xml.internal.ws.addressing.policy.AddressingFeatureConfigurator;
 import com.wj.reggie.common.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +18,7 @@ import java.util.List;
 public class WebMvcConfig extends WebMvcConfigurationSupport {
     /**
      * 静的リソースマッピングを設定する
-     * @param registry
+
      */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
